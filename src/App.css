@@ -1,0 +1,32 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css");
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
+.spinnerFix {
+  margin: 0 auto;
+}
+.iconSize {
+  font-size: 1.2em;
+}
+.metaPostBg {
+  object-fit: cover !important;
+  height: 100%;
+  width: 100%;
+}
+.likePost {
+  transition: all ease-in-out 100ms;
+  cursor: pointer;
+}
+.likePost:hover {
+  font-size: 1.25em;
+}
+.userLink {
+  text-decoration: none;
+  color: var(--bs-dark);
+}
+.userLink:hover {
+  color: var(--bs-danger);
+  opacity: 0.8;
+}
+.UserCardNickname{
+  font-family: 'Work Sans', sans-serif!important;
+  font-size: 1.5em;
+}
