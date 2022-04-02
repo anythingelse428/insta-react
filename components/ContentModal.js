@@ -40,18 +40,18 @@ function ContentModal() {
       onHide={handleClose}
       className="w-100"
       dialogClassName="w-100"
-      size="xl"
+      size="xxl"
     >
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body className="w-100">
         <div className="container container-lg">
           <div className="row">
-            <div className="col col-6">
+            <div className="col col-6 col-md-12">
               <img src={user.src} width={"100%"} />
             </div>
-            <div className="col col-6">
+            <div className="col col-6 col-md-12">
               <div className="row align-items-center">
-                <div className="col col-2 py-3">
+                <div className="col col-2 py-3 col-md-1">
                   <img
                     className="rounded-circle"
                     width="100%"

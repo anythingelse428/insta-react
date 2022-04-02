@@ -9,7 +9,7 @@ const logger = (log, type = 'warn') => {
 
 const API_CONFIG = {
     protocol: 'https:',
-    host: 'iny.su',
+    host: 'anythingelse.iny.su',
     pathname: 'api/method/'
 }
 

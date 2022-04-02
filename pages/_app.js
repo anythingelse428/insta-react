@@ -8,7 +8,7 @@ import { SSRProvider } from 'react-bootstrap'
 export default function MyApp({ Component, pageProps }) {
     useEffect(() => {
         const Api = useAuth()
-        Api.install(5, {
+        Api.install(1, {
             routerPush: (routeName, routeReason) => {
                 console.log(routeName, routeReason);
             },

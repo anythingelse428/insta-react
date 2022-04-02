@@ -13,7 +13,7 @@ function MetaPost(props) {
   }, [props.id]);
   return (
 
-    <div className="col col-7 p-7 my-3">
+    <div className="col col-7 col-md-11 p-7 my-3">
       <div
         className="card mainMetaPost"
         style={{

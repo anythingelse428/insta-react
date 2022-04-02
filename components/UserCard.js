@@ -44,7 +44,7 @@ const UserCard = (props, { width, height, ...rest }) => {
           {inView &&
             <img
               className="rounded-circle "
-              width="75%"
+              width="65%"
               src={user.avatar}
               alt={user.id}
               {...rest}
