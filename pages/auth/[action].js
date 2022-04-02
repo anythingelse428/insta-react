@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Button, Container, Form, Row } from "react-bootstrap";
+import { Button, Container, Form, Row, Alert } from "react-bootstrap";
 import { Api, useIsAuth } from "../../hooks/Auth";
 import * as React from 'react';
 
@@ -13,36 +13,92 @@ function Login() {
     const [gender, setGender] = useState('male')
     const router = useRouter()
     const [action, setAction] = useState(router.query.action)
+    const [showError, setShowError] = useState(false)
+    const [error, setError] = useState('')
     useEffect(() => {
         setAction(router.query.action)
     }, [router.query.action])
-    console.log(router.query.action);
+
+    const errorHandle = (msg) => {
+        setError(msg)
+        setShowError(true)
+
+        setTimeout(() => {
+            setError('')
+            setShowError(false)
+        }, 8000);
+        return
+    }
     const login = () => {
-        if (!mail || !pwd) return
-        Api.login(mail, pwd)
-            .then(({ data }) => { console.log(data); })
-        router.push('/')
+        if (mail && pwd) {
+
+            Api.login(mail, pwd)
+                .then((data) => {
+                    switch (data.status) {
+                        case 1010:
+                            errorHandle("Неверный пароль")
+                            break;
+                        case 1006:
+                            errorHandle("Неверный E-mail")
+                            break;
+                        default:
+                            router.push('/')
+
+                            break;
+                    }
+                })
+        } else errorHandle("Все поля обязательны для заполнения")
     }
     const register = () => {
-        Api.register(name, surname, mail, gender, pwd)
-        router.push('/')
+        if (name && surname && mail && gender && pwd) {
+            Api.register(name, surname, mail, gender, pwd)
+                .then(res => {
+                    switch (res.status) {
+                        case 1001:
+                            errorHandle("Пожалуйста, введите настоящее имя")
+                            break;
+                        case 1002:
+                            errorHandle("Пожалуйста, введите настоящую фамилию")
+                            break;
+                        case 1007:
+                            errorHandle("На этот e-mail уже зарегистрирован аккаунт")
+                            break;
+                        case 1008:
+                            errorHandle("Пожалуйста, проверьте правильность E-mail")
+                            break;
+                        case 1009:
+                            errorHandle("Длина пароля должна быть не менее 7 символов")
+                            break;
+                        default:
+                            router.push('/')
+                            break;
+                    }
+                })
+        }
+        else {
+            errorHandle("Все поля обязательны для заполнения")
+        }
     }
-    const logout = () => {
-        Api.logout()
-        router.push('/')
-    }
+
     useEffect(() => {
         useIsAuth((is) => {
             setIsAuth(is)
-            console.log(is);
         })
     }, [])
     return (
         <Container className="d-flex flex-column align-items-center mt-5">
+            {showError &&
+                <Alert variant="danger" onClose={() => setShowError(false)} dismissible>
+                    <Alert.Heading>Ошибка!</Alert.Heading>
+                    <p>
+                        {error}
+                    </p>
+                </Alert>
+            }
             <Row >
                 <div className="col-12  mb-3">
                     <Button size="sm" className="me-3" onClick={() => setAction('login')}>Авторизация</Button>
-                    <Button size="sm" className="" onClick={() => setAction('registration')}>Регистрация</Button>
+                    {!isAuth && <Button size="sm" className="" onClick={() => setAction('registration')}>Регистрация</Button>}
                 </div>
             </Row>
             {action == 'login' &&
@@ -54,10 +110,7 @@ function Login() {
                         <Form.Control placeholder="Пароль" type="password" value={pwd} onChange={(e) => { setPwd(e.target.value) }} />
                     </Form.Group>
                     <Button onClick={login}>Войти</Button>
-                    <h3 className="dashedHeader">
-                        или
-                    </h3>
-                    <a href="https://iny.su/auth?app_id=5"><img src="https://iny.su/favicon.ico?v=2" width={"10%"}/> Войти через INY</a>
+
                 </Form>
             }
             {action == 'registration' &&
@@ -74,8 +127,8 @@ function Login() {
                     </Form.Group>
 
                     <Form.Group className="mb-2">
-                        <Form.Check type="radio" label="Мужык" onClick={() => setGender("male")} name="gender" />
-                        <Form.Check type="radio" label="neМужык" onClick={() => setGender("female")} name="gender" />
+                        <Form.Check type="radio" label="Мужской" onClick={() => setGender("male")} name="gender" />
+                        <Form.Check type="radio" label="Женский" onClick={() => setGender("female")} name="gender" />
                     </Form.Group>
 
                     <Button onClick={register}>Регистрация</Button>

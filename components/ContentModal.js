@@ -51,13 +51,7 @@ function ContentModal() {
             </div>
             <div className="col col-6 col-md-12">
               <div className="row align-items-center">
-                <div className="col col-2 py-3 col-md-1">
-                  <img
-                    className="rounded-circle"
-                    width="100%"
-                    src={user.user.avatar}
-                  />
-                </div>
+
                 <div className="col col-10">
                   <span>{user.user.name}</span>
                 </div>
@@ -66,14 +60,8 @@ function ContentModal() {
 
               <div className="col col-6">
                 <div className="card-title d-flex align-items-center">
-                  <img
-                    src={user.user.avatar}
-                    width={"15%"}
-                    className="rounded-circle"
-                    alt={user.user.name}
-                  />
                   <a className="userLink">
-                    <b className="ms-3 fs-6 mb-0">{user.user.name}</b>
+                    <b className="ms-1 fs-6 mb-0">{user.user.name}</b>
                   </a>
                   <span className="ms-3">
                     lorem

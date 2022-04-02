@@ -67,7 +67,7 @@ const UserCard = (props, { width, height, ...rest }) => {
               </button>
             </div>
             <div className="col col-12 col-lg-7 mb-2">
-              <div className="row">
+              <div>
                 <div className="col pe-2 col-4">
                   Публикаций <b>{user.email.length}</b>
                 </div>

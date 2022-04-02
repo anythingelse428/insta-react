@@ -13,7 +13,7 @@ function UserBar(props) {
           <div
             onClick={() => setSelectedBar("posts")}
             className={
-              "col text-center py-3" +
+              "col text-center py-2" +
               (selectedBar === "posts" ? " border-top border-dark" : "")
             }
           >
@@ -22,7 +22,7 @@ function UserBar(props) {
           <div
             onClick={() => setSelectedBar("reels")}
             className={
-              "col text-center py-3" +
+              "col text-center py-2" +
               (selectedBar === "reels" ? " border-top border-dark" : "")
             }
           >
@@ -31,7 +31,7 @@ function UserBar(props) {
           <div
             onClick={() => setSelectedBar("videos")}
             className={
-              "col text-center py-3" +
+              "col text-center py-2" +
               (selectedBar === "videos" ? " border-top border-dark" : "")
             }
           >
@@ -40,7 +40,7 @@ function UserBar(props) {
           <div
             onClick={() => setSelectedBar("check-out")}
             className={
-              "col text-center py-3" +
+              "col text-center py-2" +
               (selectedBar === "check-out" ? " border-top border-dark" : "")
             }
           >

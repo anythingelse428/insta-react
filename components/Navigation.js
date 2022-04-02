@@ -1,19 +1,27 @@
+import { Button, Row } from "react-bootstrap";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useIsAuth } from "../hooks/Auth";
+import { useIsAuth, useUser, Api } from "../hooks/Auth";
 
 function Navigation() {
+  const router = useRouter()
   const [isAuth, setIsAuth] = useState(false)
+  const [yourProfileData, setYourProfileData] = useState({})
+
   useEffect(() => {
     useIsAuth((is) => {
       setIsAuth(is)
-      console.log(isAuth);
     })
-  })
+    useUser(user => setYourProfileData(user))
 
-  const [yourProfileData, setYourProfileData] = useState({})
+  })
+  const logout = () => {
+    Api.logout()
+    router.push('/')
+  }
   if (typeof window !== 'undefined') {
-     }
+  }
   return (
     <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
       <div className="justify-content-around container">
@@ -24,7 +32,7 @@ function Navigation() {
           </a>
         </Link>
 
-        <div className="d-flex">
+        <div className="nav-item d-flex justify-content-center align-items-center">
           {!isAuth &&
             <>
               <Link href="/auth/login">
@@ -36,9 +44,9 @@ function Navigation() {
             </>
           }
           {isAuth &&
-            <>
-              Welcome, {yourProfileData.name}
-            </>
+            <div className="nav-item">
+              <span className="mx-2">{yourProfileData.name} </span><Button  onClick={logout}>Выйти</Button>
+            </div>
           }
         </div>
       </div>

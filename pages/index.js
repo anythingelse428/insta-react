@@ -27,7 +27,6 @@ function Index({ users }) {
 }
 export default Index
 export async function getStaticProps(ctx) {
-  console.log(1);
   const { data } = await Api.GetUser()
   const users = data
   return {

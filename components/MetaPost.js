@@ -13,12 +13,9 @@ function MetaPost(props) {
   }, [props.id]);
   return (
 
-    <div className="col col-7 col-md-11 p-7 my-3">
+    <div className="col col-12 col-md-7 p-7 my-3">
       <div
         className="card mainMetaPost"
-        style={{
-          width: "100%",
-        }}
       >
         <div className="card-title d-flex align-items-center">
           <img
